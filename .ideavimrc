@@ -1,0 +1,173 @@
+" Don't use Ex mode, use Q for formatting.
+map Q gq
+
+" --- Enable IdeaVim plugins https://jb.gg/ideavim-plugins
+
+" Highlight copied text
+Plug 'machakann/vim-highlightedyank'
+" Commentary plugin
+Plug 'tpope/vim-commentary'
+
+
+"" Source your .vimrc
+"source ~/.vimrc
+set surround
+set NERDTree
+set which-key
+set notimeout
+set ideajoin
+set clipboard+=unnamed
+" this for linux
+set clipboard+=unnamedplus
+let map leader = ","
+imap kj <Esc>
+set timeoutlen=900
+
+" buffer
+let g:WhichKeyDesc_buffer = ",b buffer"
+let g:WhichKeyDesc_bufferEditors = ",bs switch editors"
+let g:WhichKeyDesc_bufferNextEditor = ",bl right editor"
+let g:WhichKeyDesc_bufferPrevEditor = ",bh left editor"
+let g:WhichKeyDesc_bufferBackinHisto = ",bb back in histo"
+let g:WhichKeyDesc_bufferForwardHisto = ",bf forward in histo"
+let g:WhichKeyDesc_bufferClose = ",bd close"
+let g:WhichKeyDesc_bufferSave = ",bw save"
+
+" debugging
+let g:WhichKeyDesc_debugroot = ",d debug"
+let g:WhichKeyDesc_debugBreakpoint = ",db breakpoint"
+let g:WhichKeyDesc_debugDebug = ",dd debug run"
+let g:WhichKeyDesc_debugTest = ",dt start"
+
+" go
+let g:WhichKeyDesc_go = ",g  go"
+let g:WhichKeyDesc_goimpl = ",gi go impl"
+let g:WhichKeyDesc_goSuper = ",gu super method"
+let g:WhichKeyDesc_goDeclaration = ",gd declaration"
+let g:WhichKeyDesc_goRef = ",gr reference"
+let g:WhichKeyDesc_golast = ",gl last change"
+let g:WhichKeyDesc_goNextErr = ",gn next error"
+let g:WhichKeyDesc_goPrevErr = ",gp prev error"
+
+let g:WhichKeyDesc_file = ",f file or source"
+let g:WhichKeyDesc_fileSource = ",fg source"
+let g:WhichKeyDesc_fileReload = ",fl reload"
+let g:WhichKeyDesc_fileOpen = ",fo open"
+let g:WhichKeyDesc_fileIncreaseFont = ",fi increase font"
+let g:WhichKeyDesc_fileDecreaseFont = ",fd decrease font"
+
+let g:WhichKeyDesc_lsp = ",l lsp"
+let g:WhichKeyDesc_lspHover = ",lh  hover"
+let g:WhichKeyDesc_lspshowerror = ",le show error"
+let g:WhichKeyDesc_lspcommentl = ",ll comment line"
+let g:WhichKeyDesc_lspcommentb = ",lb comment block"
+let g:WhichKeyDesc_lspaction = ",la actions"
+let g:WhichKeyDesc_lsprename = ",lr rename"
+let g:WhichKeyDesc_lspcollapse = ",lz collapse"
+let g:WhichKeyDesc_lspexpand = ",lo expand"
+let g:WhichKeyDesc_lspIntroVar = ",lv introduce var"
+let g:WhichKeyDesc_lspReformF = ",lf reformat file"
+let g:WhichKeyDesc_lspReimports = ",li clean imports"
+
+let g:WhichKeyDesc_project = ",p project"
+let g:WhichKeyDesc_projectCompile = ",pc compile"
+let g:WhichKeyDesc_projectRun = ",pr run"
+
+let g:WhichKeyDesc_git = ",m git"
+let g:WhichKeyDesc_gitpush = ",mp push"
+let g:WhichKeyDesc_gitpull = ",mm pull"
+
+let g:WhichKeyDesc_vim = ",v  vim"
+let g:WhichKeyDesc_vimDelete = ",vd delete to reg a"
+let g:WhichKeyDesc_vimPaste = ",vp paste with reg a"
+let g:WhichKeyDesc_vimMacro = ",vm run macro a"
+
+let g:WhichKeyDesc_navigate = ",n navigate"
+let g:WhichKeyDesc_navigateNerdTree = ",nn nerdTree"
+let g:WhichKeyDesc_navigateOutline = ",ns outline"
+let g:WhichKeyDesc_navigateRun = ",nr run"
+let g:WhichKeyDesc_navigateClose = ",nw close"
+
+"" -- Suggested options --
+" Show a few lines of context around the cursor. Note that this makes the
+" text scroll if you mouse-click near the start or end of the window.
+set scrolloff=5
+" Do incremental searching.
+set incsearch
+" use ide join with shift j
+
+imap <C-J> <Down>
+imap <C-K> <Up>
+
+" debugging"
+nmap ,db <Action>(ToggleLineBreakpoint)
+nmap ,dt <Action>(RunClass)
+nmap ,dd <Action>(DebugClass)
+
+" b buffer
+nmap ,bs <Action>(Switcher)
+nmap ,bh <Action>(PreviousTab)
+nmap ,bl <Action>(NextTab)
+nmap ,bb <Action>(Back)
+nmap ,bf <Action>(Forward)
+nmap ,bd <Action>(CloseContent)
+nmap ,bw <Action>(SaveDocument)
+
+
+" file
+nmap ,fg <Action>(IdeaVim.ReloadVimRc.reload)
+nmap ,fl <Action>(ExternalSystem.ProjectRefreshAction)
+nmap ,fi <Action>(EditorIncreaseFontSizeGlobal)
+nmap ,fd <Action>(EditorDecreaseFontSize)
+nmap ,fo <Action>(RevealIn)
+
+" lsp GoTo
+nmap ,gd <Action>(GotoDeclaration)
+nmap ,gr <Action>(FindUsages)
+nmap ,gi <Action>(GotoImplementation)
+nmap ,gn <Action>(GotoNextError)
+nmap ,gp <Action>(GotoPreviousError)
+nmap ,gl <Action>(JumpToLastChange)
+nmap ,gu <Action>(GotoSuperMethod)
+
+" vim
+nmap ,vd "adiw
+nmap ,vp "ap
+nmap ,vm @a
+
+" lsp
+nmap ,ll :action CommentByLineComment<CR>
+vmap ,lb :action CommentByBlockComment<CR>
+nmap ,lr <Action>(RenameElement)
+nmap ,lv <Action>(IntroduceVariable)
+nmap ,lz <Action>(CollapseRegion)
+nmap ,lo <Action>(ExpandRegion)<CR>
+nmap ,la <Action>(Generate)<CR>
+map ,le <Action>(ShowErrorDescription)
+map ,lh <Action>(QuickJavaDoc)
+nmap ,lf <Action>(ReformatCode)
+nmap ,li <Action>(OptimizeImports)
+
+" project
+nmap ,pr <Action>(Run)
+nmap ,pc :action CompileProject<CR>
+
+" copy reference
+nmap ,rcr <Action>(CopyReference)
+nmap ,rco <Action>(OverrideMethods)
+"nmap <C-j> <Action>(Tree-selectNext)
+
+" duplicate selections
+vnoremap ,d :action EditorDuplicate<CR>
+
+" git
+map ,mp <Action>(Git.Commit.And.Push.Executor)
+map ,mm <Action>(Git.Pull)
+
+" navigate
+nmap fj 15j
+nmap fk 15k
+nmap ,ns <Action>(ActivateStructureToolWindow)
+nmap ,nw <Action>(HideActiveWindow)
+nmap ,nr <Action>(ActivateRunToolWindow)
+nmap ,nn :NERDTree<CR>
