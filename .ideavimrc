@@ -68,6 +68,9 @@ let g:WhichKeyDesc_lspexpand = ",lo expand"
 let g:WhichKeyDesc_lspIntroVar = ",lv introduce var"
 let g:WhichKeyDesc_lspReformF = ",lf reformat file"
 let g:WhichKeyDesc_lspReimports = ",li clean imports"
+let g:WhichKeyDesc_lspOverrideMoreActions = ",lc more actions"
+let g:WhichKeyDesc_lspOverrideMeth = ",lco override method"
+let g:WhichKeyDesc_lspCopyRef = ",lcr copy ref"
 
 let g:WhichKeyDesc_project = ",p project"
 let g:WhichKeyDesc_projectCompile = ",pc compile"
@@ -147,15 +150,12 @@ map ,le <Action>(ShowErrorDescription)
 map ,lh <Action>(QuickJavaDoc)
 nmap ,lf <Action>(ReformatCode)
 nmap ,li <Action>(OptimizeImports)
+nmap ,lco <Action>(OverrideMethods)
+nmap ,lcr <Action>(CopyReference)
 
 " project
 nmap ,pr <Action>(Run)
 nmap ,pc :action CompileProject<CR>
-
-" copy reference
-nmap ,rcr <Action>(CopyReference)
-nmap ,rco <Action>(OverrideMethods)
-"nmap <C-j> <Action>(Tree-selectNext)
 
 " duplicate selections
 vnoremap ,d :action EditorDuplicate<CR>
